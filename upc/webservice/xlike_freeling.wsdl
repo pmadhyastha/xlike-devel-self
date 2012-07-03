@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://localhost:9090/axis2/services/xlike_freeling_LANG/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  name="xlike_freeling_LANG"
+                  targetNamespace="http://localhost:9090/axis2/services/xlike_freeling_LANG/">
+  <!-- WSDL - Types -->
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://localhost:9090/axis2/services/xlike_freeling_LANG/">
+
+      <xsd:element name="inputText">
+        <xsd:element name="text" type="xsd:string" />
+      </xsd:element>     
+
+      <xsd:element name="identifiedLanguage">
+        <xsd:element name="language" type="xsd:string" />
+      </xsd:element>     
+
+      <xsd:element name="analysisRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="analysisOptions">
+              <xsd:sequence>
+                <xsd:element name="input" type="xsd:string" />
+                <xsd:element name="output" type="xsd:string" />
+                <xsd:element name="conll" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="nec" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="numbers" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="punctuation" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="dates" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="multiwords" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="ner" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="quantities" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+              </xsd:sequence>
+            </xsd:element>
+            <xsd:element name="text" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="analysisResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="analysis" type="xsd:string" />
+            <xsd:element name="conll" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>     
+
+    </xsd:schema>
+  </wsdl:types>
+
+  <!-- WSDL - Messages -->
+  <wsdl:message name="analyzeRequest">
+     <wsdl:part name="part1" element="tns:analysisRequest" />
+  </wsdl:message>
+  <wsdl:message name="analyzeResponse">
+     <wsdl:part name="part1" element="tns:analysisResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="identRequest">
+     <wsdl:part name="part1" element="tns:inputText" />
+  </wsdl:message>
+  <wsdl:message name="identResponse">
+     <wsdl:part name="part1" element="tns:identifiedLanguage" />
+  </wsdl:message>
+
+  <!-- WSDL - portType -->
+  <wsdl:portType name="xlike_freeling_LANG">
+    <wsdl:operation name="analyze">
+      <wsdl:input message="tns:analyzeRequest" />
+      <wsdl:output message="tns:analyzeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ident">
+      <wsdl:input message="tns:identRequest" />
+      <wsdl:output message="tns:identResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <!-- WSDL - Binding -->
+  <wsdl:binding name="xlike_freeling_LANG_SOAP" type="tns:xlike_freeling_LANG">
+    <soap:binding style="document"
+                  transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="analyze">
+      <soap:operation soapAction="xlike_freeling_LANG#analyze" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ident">
+      <soap:operation soapAction="xlike_freeling_LANG#ident" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <!-- WSDL - Service -->
+  <wsdl:service name="xlike_freeling_LANG">
+    <wsdl:port binding="tns:xlike_freeling_LANG_SOAP" name="xlike_freeling_LANG_SOAP">
+      <soap:address location="http://localhost:9090/axis2/services/xlike_freeling_LANG" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
+

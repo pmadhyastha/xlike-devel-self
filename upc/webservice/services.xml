@@ -1,0 +1,14 @@
+<service name="xlike_freeling_LANG">
+  <parameter name="ServiceClass" locked="xsd:false">xlike_freeling_LANG</parameter>
+  <description>WS providing access to all FreeLing funcionalities for LANG</description>
+  <operation name="analyze">
+    <messageReceiver class="wsf_cpp_msg_recv" />
+    <parameter name="RESTMethod">GET</parameter>
+    <parameter name="RESTLocation">analyze/{input}/{output}/{conll}/{nec}/{text}</parameter>
+  </operation>
+  <operation name="ident">
+    <messageReceiver class="wsf_cpp_msg_recv" />
+    <parameter name="RESTMethod">GET</parameter>
+    <parameter name="RESTLocation">ident/{text}</parameter>
+  </operation>
+</service>
